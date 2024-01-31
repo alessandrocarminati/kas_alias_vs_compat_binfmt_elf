@@ -26,3 +26,20 @@ main.c|main|NA|
 main.h|header|NA|
 use.c|file that includes another c file|compat_binfmt_elf.c|
 test.sh|build the executables and demonstrates the poc|NA|
+
+## Sample Run
+```
+~ $ ./test.sh 
+rm -f main1  main2 *.o
+gcc -g -c main.c -o main.o
+gcc -g -c inc.c -o inc.o
+gcc main.o inc.o -o main1
+gcc -g -c use.c -o use.o
+gcc main.o use.o -o main2
+testing line where print_test is defined in main1:
+print_test
+/tmp/test_line/inc.c:10
+testing line where print_test is defined in main2:
+print_test
+/tmp/test_line/inc.c:use.c:10
+```
